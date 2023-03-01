@@ -45,31 +45,32 @@
 
 		Search Crop Name : <input type="text" name="cropName" /><br> <input
 			type="submit" value="Seacrh" />
-    </form>
-    <div>
+	</form>
+	<div>
 		<table class="table">
 			<tr>
+				<th>ID</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Region</th>
 				<th>Total Days</th>
+				<th>EDIT</th>
+				<th> DELETE </th>
 			</tr>
 
 			<c:forEach items="${list}" var="k">
-
 				<tr>
+					<td>${k.id}</td>
 					<td>${k.cropName}</td>
 					<td>${k.type}</td>
 					<td>${k.region}</td>
 					<td>${k.totdays}</td>
+					<td><a href="update?id=${k.id}"> Edit </a></td>
+					<td><a href="delete?id=${k.id}"> Delete </a></td>
+					
 				</tr>
 			</c:forEach>
-
-
 		</table>
-
 	</div>
-
-
 </body>
 </html>

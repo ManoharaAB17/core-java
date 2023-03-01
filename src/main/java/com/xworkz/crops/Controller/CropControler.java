@@ -23,19 +23,20 @@ public class CropControler {
 
 	@Autowired
 	private CropService cropService;
-	
+
 	public CropControler() {
 		System.out.println("Created  Crop Controller");
 	}
-	
-	List<String> region = Arrays.asList("Karnataka", "Andra Pardesh", "tamilnadu", "kerala", "goa","Madya pradesh", "Andra pradesh");
-	
+
+	List<String> region = Arrays.asList("Karnataka", "Andra Pardesh", "tamilnadu", "kerala", "goa", "Madya pradesh",
+			"Andra pradesh");
+
 	@GetMapping("/cropp")
 	public String onCrop(Model m) {
 		m.addAttribute("regions", region);
 		return "Crop.jsp";
 	}
-	
+
 	@PostMapping("/cropp")
 	public String onCrop(CropDTO dto, Model mo) {
 		Set<ConstraintViolation<CropDTO>> constraintViolations = this.cropService.vlaidateAndSave(dto);
@@ -44,33 +45,75 @@ public class CropControler {
 			System.out.println(dto);
 			return "disp.jsp";
 		}
-		
+
 		mo.addAttribute("regions", region);
-       
-		mo.addAttribute("cv" , constraintViolations);
+
+		mo.addAttribute("cv", constraintViolations);
 		System.out.println(dto);
-		
-		System.err.println(" violation in controller" );
+
+		System.err.println(" violation in controller");
 		return "Crop.jsp";
 	}
-	
+
 	@GetMapping("/search")
-	public String onSearch(@RequestParam int id , Model model) {
-		System.out.println("Running on search for id "+id);
-		CropDTO dto =  this.cropService.findById(id);
-		if(dto!=null) {
-			model.addAttribute("dto",dto);
-		}else {
-			model.addAttribute("message","Data not found"); 
+	public String onSearch(@RequestParam int id, Model model) {
+		System.out.println("Running on search for id " + id);
+		CropDTO dto = this.cropService.findById(id);
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+		} else {
+			model.addAttribute("message", "Data not found");
 		}
 		return "Search.jsp";
 	}
-	
+
 	@GetMapping("/seacrhByCropName")
-	public String onSeacrh(@RequestParam String cropName , Model m) {
+	public String onSeacrh(@RequestParam String cropName, Model m) {
 		System.out.println("RUnning On Search By Crop Name");
-		List<CropDTO> lists =this.cropService.findByCropName(cropName);
+		List<CropDTO> lists = this.cropService.findByCropName(cropName);
 		m.addAttribute("list", lists);
 		return "SearchByCropName.jsp";
 	}
+
+	@GetMapping("/update")
+	public String onUpdate(@RequestParam int id, Model m) {
+		System.out.println("Update By Id");
+		CropDTO dto = this.cropService.findById(id);
+		m.addAttribute("dto", dto);
+		m.addAttribute("regions", region);
+		return "Update.jsp";
+	}
+
+	@PostMapping("/update")
+	public String onUpdate(Model m, CropDTO dto) {
+		System.out.println("Running update" + dto);
+
+		Set<ConstraintViolation<CropDTO>> violations = this.cropService.validateAndUpdate(dto);
+
+		if (violations.size() > 0) {
+			m.addAttribute("err", violations);
+		} else {
+			m.addAttribute("message", "Crop DTO UPDATE sucessful");
+		}
+		m.addAttribute("dto", dto);
+		m.addAttribute("regions", region);
+
+		return "Update.jsp";
+	}
+	
+//	@GetMapping("/delete")
+//	public String onDelete(@RequestParam int id , Model m ,CropDTO dto) {
+//		Set<ConstraintViolation<CropDTO>> violations = this.cropService.validateAndDelete(dto);
+//		if (violations.size() > 0) {
+//			m.addAttribute("err", violations);
+//		} else {
+//			m.addAttribute("message", "Crop DTO UPDATE sucessful");
+//		}
+//		CropDTO dtos = this.cropService.findById(id);
+//		m.addAttribute("dto", dtos);
+//		
+//		
+//		return "SearchByCropName.jsp";
+//	}
+
 }

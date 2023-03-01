@@ -10,6 +10,10 @@ import com.xworkz.crops.dto.CropDTO;
 public interface CropService {
 	Set<ConstraintViolation<CropDTO>> vlaidateAndSave(CropDTO dto);
 	
+	Set<ConstraintViolation<CropDTO>> validateAndUpdate(CropDTO dtos);
+	
+//	Set<ConstraintViolation<CropDTO>> validateAndDelete(CropDTO dtod);
+	
 	CropDTO findById(int id);
 	
 	default List<CropDTO> findByCropName(String cropName){

@@ -12,6 +12,7 @@ import lombok.Data;
 @Entity
 @Table(name = "cropdata")
 @NamedQuery(name = "findByCropName", query = "select enttt from CropEntity enttt where enttt.cropName=:cp")
+//@NamedQuery(name = "deleteById", query = "delete enttt from CropEntity enttt where enttt.id = : did ")
 public class CropEntity {
 	@Id
 	@Column(name = "id")

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,23 @@ public class CropRepoImpl implements CropRepo {
 	}
 
 	@Override
+	public boolean update(CropEntity entity) {
+		System.out.println("Running Update");
+
+		EntityManager manager = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			manager.merge(entity);
+			transaction.commit();
+			return true;
+		} finally {
+			manager.close();
+		}
+	}
+
+
+	@Override
 	public CropEntity findById(int id) {
 		System.out.println("Find By id in Repository... " + id);
 		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
@@ -49,15 +67,33 @@ public class CropRepoImpl implements CropRepo {
 		EntityManager manager = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("findByCropName");
-            
 			query.setParameter("cp", cropName);
-		//	query.setParameter("cropname", cropName);
-			
 			List<CropEntity> list = query.getResultList();
-
 			return list;
 		} finally {
 			manager.close();
 		}
 	}
+
+//	@Override
+//	public List<CropEntity> deleteById(int id) {
+//		System.out.println("Delete By Id ..... " + id);
+//		EntityManager manager = this.entityManagerFactory.createEntityManager();
+//		try {
+//			Query query = manager.createNamedQuery("findById");
+//			query.setParameter("did", id);
+//			List<CropEntity> list = query.getResultList();
+//			EntityTransaction transaction = manager.getTransaction();
+//			transaction.begin();
+//	       manager.merge(list);
+//			transaction.commit();
+//			
+//		}
+//		 finally {
+//			 manager.close();
+//		 }
+//		
+//		return CropRepo.super.deleteById(id);
+//	}
+    	
 }

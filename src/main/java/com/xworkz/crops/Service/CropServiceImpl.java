@@ -48,6 +48,7 @@ public class CropServiceImpl implements CropService {
 			entity.setType(dto.getType());
 			entity.setTotdays(dto.getTotdays());
 			entity.setRegion(dto.getRegion());
+			entity.setId(dto.getId());
 			boolean saved = this.cropRepo.save(entity);
 			System.out.println("Entity Data is saved "+saved); 			
 			
@@ -55,6 +56,60 @@ public class CropServiceImpl implements CropService {
 		}
 	
 	}
+	@Override
+	public Set<ConstraintViolation<CropDTO>> validateAndUpdate(CropDTO dtos) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        
+        Set<ConstraintViolation<CropDTO>> violations = validator.validate(dtos);
+        
+        if(violations !=null && !violations.isEmpty()) {
+        	System.err.println("Violations in DTO " +dtos);
+        	return violations;
+        }
+        else
+        {
+        	System.out.println(" constraintViolations doesn't exist data is good ");
+        	CropEntity entity = new CropEntity();
+			entity.setCropName(dtos.getCropName());
+			entity.setType(dtos.getType());
+			entity.setTotdays(dtos.getTotdays());
+			entity.setRegion(dtos.getRegion());
+			entity.setId(dtos.getId());
+			boolean saved = this.cropRepo.update(entity);
+			System.out.println(saved);
+			return Collections.emptySet();
+        }
+ 
+	}
+
+//	@Override
+//	public Set<ConstraintViolation<CropDTO>> validateAndDelete(CropDTO dtod) {
+//		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        Validator validator = factory.getValidator();
+//        
+//        Set<ConstraintViolation<CropDTO>> violations = validator.validate(dtod);
+//        
+//        if(violations !=null && !violations.isEmpty()) {
+//        	System.err.println("Violations in DTO " +dtod);
+//        	return violations;
+//        }
+//        else
+//        {
+//        	System.out.println(" constraintViolations doesn't exist data is good ");
+//        	CropEntity entity = new CropEntity();
+//			entity.setCropName(dtod.getCropName());
+//			entity.setType(dtod.getType());
+//			entity.setTotdays(dtod.getTotdays());
+//			entity.setRegion(dtod.getRegion());
+//			entity.setId(dtod.getId());
+//			boolean saved = this.cropRepo.update(entity);
+//			System.out.println(saved);
+//			return Collections.emptySet();
+//        }
+// 
+//	}
+	
 
 	@Override
 	public CropDTO findById(int id) {
@@ -94,6 +149,7 @@ public class CropServiceImpl implements CropService {
 				dto.setRegion(cropEnt.getRegion());
 				dto.setTotdays(cropEnt.getTotdays());
 				dto.setType(cropEnt.getType());
+				dto.setId(cropEnt.getId());
 				listDto.add(dto);
 			}
 			System.out.println("Size of dtos" +listDto.size());
@@ -104,7 +160,7 @@ public class CropServiceImpl implements CropService {
 			System.err.println("Crop Name is invalid");
 		}
 		return CropService.super.findByCropName(cropName);
-		
 	}
 
+	
 }

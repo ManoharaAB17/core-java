@@ -75,25 +75,25 @@ public class CropRepoImpl implements CropRepo {
 		}
 	}
 
-//	@Override
-//	public List<CropEntity> deleteById(int id) {
-//		System.out.println("Delete By Id ..... " + id);
-//		EntityManager manager = this.entityManagerFactory.createEntityManager();
-//		try {
-//			Query query = manager.createNamedQuery("findById");
-//			query.setParameter("did", id);
-//			List<CropEntity> list = query.getResultList();
-//			EntityTransaction transaction = manager.getTransaction();
-//			transaction.begin();
-//	       manager.merge(list);
-//			transaction.commit();
-//			
-//		}
-//		 finally {
-//			 manager.close();
-//		 }
-//		
-//		return CropRepo.super.deleteById(id);
-//	}
+	@Override
+	public  CropEntity deleteById(int id) {
+		System.out.println("Delete By Id ..... " + id);
+		EntityManager manager = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction transaction = manager.getTransaction();
+			CropEntity entity = manager.find(CropEntity.class, id);
+			if(entity!=null) {
+				transaction.begin();
+		         manager.remove(entity);
+				transaction.commit();
+				return entity;
+			}			
+		}
+		 finally {
+			 manager.close();
+		 }
+		
+		return CropRepo.super.deleteById(id);
+	}
     	
 }

@@ -97,23 +97,20 @@ public class CropControler {
 		}
 		m.addAttribute("dto", dto);
 		m.addAttribute("regions", region);
+		m.addAttribute("messages", "Crop Dto Update sucessful");
+
 
 		return "Update.jsp";
 	}
-	
-//	@GetMapping("/delete")
-//	public String onDelete(@RequestParam int id , Model m ,CropDTO dto) {
-//		Set<ConstraintViolation<CropDTO>> violations = this.cropService.validateAndDelete(dto);
-//		if (violations.size() > 0) {
-//			m.addAttribute("err", violations);
-//		} else {
-//			m.addAttribute("message", "Crop DTO UPDATE sucessful");
-//		}
-//		CropDTO dtos = this.cropService.findById(id);
-//		m.addAttribute("dto", dtos);
-//		
-//		
-//		return "SearchByCropName.jsp";
-//	}
+
+	@GetMapping("/delete")
+	public String onDelete(@RequestParam int id, Model m) {
+		System.out.println("Running on delete");
+		CropDTO dto = this.cropService.deleteById(id);
+		m.addAttribute("delete", dto);
+		m.addAttribute("message", "Data Deleted sucessful");
+
+		return "SearchByCropName.jsp";
+	}
 
 }

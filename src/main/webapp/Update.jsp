@@ -44,8 +44,7 @@
 	<p > <span style="color:red">  ${e.message	} </span> </p>
 	</c:forEach>
 	
-	
-	
+		<c:forEach  items="${messages}" var="m">	</c:forEach>	<h5> <span style="color:green">${messages} </span></h5>
 
 	<form action="update" method="post">
 		<pre>

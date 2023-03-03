@@ -19,7 +19,7 @@ public interface CropRepo {
 		 return Collections.emptyList();
 	 }
 
-	 default List<CropEntity> deleteById(int id){
-		 return Collections.emptyList();
+	 default  CropEntity  deleteById(int id){
+		 return null;
 	 }
 }

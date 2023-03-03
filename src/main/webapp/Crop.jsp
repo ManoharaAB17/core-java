@@ -40,8 +40,9 @@
 
 	<form action="cropp" method="post">
 		<pre>
+		<br>
 		 Crop name : <input type="text" name="cropName" /> 
-		TotalDays : <input type="text" name=totdays /> 
+			TotalDays : <input type="text" name=totdays /> 
 		Region : <select name="region"> 
 		      <option value=""> SELECT </option>		     
               <c:forEach items="${regions}" var="p"> 

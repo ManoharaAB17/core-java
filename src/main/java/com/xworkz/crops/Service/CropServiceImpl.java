@@ -82,34 +82,23 @@ public class CropServiceImpl implements CropService {
         }
  
 	}
-
-//	@Override
-//	public Set<ConstraintViolation<CropDTO>> validateAndDelete(CropDTO dtod) {
-//		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//        Validator validator = factory.getValidator();
-//        
-//        Set<ConstraintViolation<CropDTO>> violations = validator.validate(dtod);
-//        
-//        if(violations !=null && !violations.isEmpty()) {
-//        	System.err.println("Violations in DTO " +dtod);
-//        	return violations;
-//        }
-//        else
-//        {
-//        	System.out.println(" constraintViolations doesn't exist data is good ");
-//        	CropEntity entity = new CropEntity();
-//			entity.setCropName(dtod.getCropName());
-//			entity.setType(dtod.getType());
-//			entity.setTotdays(dtod.getTotdays());
-//			entity.setRegion(dtod.getRegion());
-//			entity.setId(dtod.getId());
-//			boolean saved = this.cropRepo.update(entity);
-//			System.out.println(saved);
-//			return Collections.emptySet();
-//        }
-// 
-//	}
 	
+	@Override
+	public CropDTO deleteById(int id) {
+		System.out.println("Running Delete By id");
+	   	CropEntity ent = this.cropRepo.deleteById(id);
+	   	if(ent!= null) {
+	   		CropDTO dto = new CropDTO();
+	   		dto.setCropName(ent.getCropName());
+	   		dto.setId(ent.getId());
+	   		dto.setRegion(ent.getRegion());
+	   		dto.setTotdays(ent.getTotdays());
+	   		dto.setType(ent.getType());
+	   		return dto;
+	   	}
+	   	else
+		return CropService.super.deleteById(id);
+	}
 
 	@Override
 	public CropDTO findById(int id) {

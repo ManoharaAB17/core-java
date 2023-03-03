@@ -12,11 +12,13 @@ public interface CropService {
 	
 	Set<ConstraintViolation<CropDTO>> validateAndUpdate(CropDTO dtos);
 	
-//	Set<ConstraintViolation<CropDTO>> validateAndDelete(CropDTO dtod);
-	
 	CropDTO findById(int id);
 	
 	default List<CropDTO> findByCropName(String cropName){
+		return null;
+	}
+	
+	default CropDTO deleteById(int id) {
 		return null;
 	}
 }

@@ -46,6 +46,9 @@
 		Search Crop Name : <input type="text" name="cropName" /><br> <input
 			type="submit" value="Seacrh" />
 	</form>
+	
+	<c:forEach  items="${message}" var="m">	</c:forEach>	<h5> <span style="colour:green">${message} </span></h5>
+	
 	<div>
 		<table class="table">
 			<tr>

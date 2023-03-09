@@ -23,17 +23,17 @@
 				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a  href="index.jsp" class="btn btn-info">Home</a></li> &nbsp;&nbsp;		
-						<li class="nav-item"><a  href="cropp" class="btn btn-info">Crop</a></li> &nbsp;&nbsp;
-						<li class="nav-item"><a  href="Search.jsp" class="btn btn-info">Search</a></li> &nbsp;&nbsp;					
-						<li class="nav-item"><a href="SearchByCropName.jsp"	class="btn btn-info">SearchByName</a></li> &nbsp;&nbsp;
+						<li class="nav-item"><a  href="index.jsp" class="btn btn-warning">Home</a></li> &nbsp;&nbsp;		
+						<li class="nav-item"><a  href="ottd" class="btn btn-warning">OTT Platform</a></li> &nbsp;&nbsp;
+						<li class="nav-item"><a  href="Search.jsp" class="btn btn-warning">Search</a></li> &nbsp;&nbsp;					
+						<li class="nav-item"><a  href="SearchByPlatform.jsp" class="btn btn-warning">SearchByPlatform</a></li> &nbsp;&nbsp;					
 						
 					</ul>
 				</div>
 			</div>
 		</nav>
 	
-	<h1> Crop UPDATE</h1>
+	<h1> Ott UPDATE</h1>
 	
 	<c:forEach items="${err}" var="e">
 	<p > <span style="color:red">  ${e.message	} </span> </p>
@@ -49,15 +49,22 @@
 	<form action="update" method="post">
 		<pre>
 		 ID : <input type="text" name="id" value="${dto.id}" readonly  />
-		 Crop name : <input type="text" name="cropName" value="${dto.cropName}" /> 
-		TotalDays : <input type="text" name=totdays value="${dto.totdays}" /> 
-		Region : <select name="region" > 
-		      				<option value="${dto.region}"> ${dto.region} </option>		     
-             			 <c:forEach items="${regions}" var="p"> 
-              			<option value="${p}">${p}</option>
-              		  </c:forEach>
-                </select>
-		 Type : <input type="text" name="type" value="${dto.type}" /> 
+		 
+		Platform : <input type="text" name="platform" value="${dto.platform}"  readonly />
+		 
+		Show : <input type="text" name=show value="${dto.show}" />
+		 
+           Language : <select name="language">
+           
+			<option value="${dto.language}">${dto.language}</option>
+			<c:forEach items="${language}" var="c">
+				<option value="${c}">${c}</option>
+			</c:forEach>
+		</select>      
+                
+		 Cost  : <input type="number" name="cost" value="${dto.cost}" /> 
+		
+		Monthly Pack  : <input type="number" name="monthlyPack" value="${dto.monthlyPack}" /> 
 		
 		</select>
 		<input type="submit" value="update" />

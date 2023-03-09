@@ -27,10 +27,10 @@
 				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a  href="index.jsp" class="btn btn-info">Home</a></li> &nbsp;&nbsp;		
-						<li class="nav-item"><a  href="cropp" class="btn btn-info">Crop</a></li> &nbsp;&nbsp;
-						<li class="nav-item"><a  href="Search.jsp" class="btn btn-info">Search</a></li> &nbsp;&nbsp;					
-						<li class="nav-item"><a  href="SearchByCropName.jsp" class="btn btn-info">SearchByName</a></li> &nbsp;&nbsp;					
+						<li class="nav-item"><a  href="index.jsp" class="btn btn-warning">Home</a></li> &nbsp;&nbsp;		
+						<li class="nav-item"><a  href="ottd" class="btn btn-warning">OTT Platform</a></li> &nbsp;&nbsp;
+						<li class="nav-item"><a  href="Search.jsp" class="btn btn-warning">Search</a></li> &nbsp;&nbsp;					
+						<li class="nav-item"><a  href="SearchByPlatform.jsp" class="btn btn-warning">SearchByPlatform</a></li> &nbsp;&nbsp;					
 						
 					</ul>
 				</div>
@@ -38,7 +38,7 @@
 		</nav>
 
 
-	<h1>Crop Search</h1>
+	<h1>Ott Search ID</h1>
 	<h3><span style="color:red;">${message} </span></h3> 
 	
 	<form action="search" method="get">
@@ -48,9 +48,14 @@
 		<input type="submit" value="search">
 			
 			<pre>
-			  Crop Name : ${dto.cropName}
-			  Totaldays : ${dto.totdays}
-			  Region : ${dto.region}
+			
+			  Platform : ${dto.platform}
+			  Show : ${dto.show}
+			  Language : ${dto.language}
+			  Cost : ${dto.cost}
+			  Monthly Pack : ${dto.monthlyPack}
+			  
+			 
 			</pre>
 	</form>
 

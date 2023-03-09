@@ -22,15 +22,16 @@
 				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a  href="index.jsp" class="btn btn-info">Home</a></li> &nbsp;&nbsp;		
-						<li class="nav-item"><a  href="cropp" class="btn btn-info">Crop</a></li> &nbsp;&nbsp;
-						<li class="nav-item"><a  href="Search.jsp" class="btn btn-info">Search</a></li> &nbsp;&nbsp;					
-						<li class="nav-item"><a  href="SearchByCropName.jsp" class="btn btn-info">SearchByName</a></li> &nbsp;&nbsp;					
+						<li class="nav-item"><a  href="index.jsp" class="btn btn-warning">Home</a></li> &nbsp;&nbsp;		
+						<li class="nav-item"><a  href="ottd" class="btn btn-warning">OTT Platform</a></li> &nbsp;&nbsp;
+						<li class="nav-item"><a  href="Search.jsp" class="btn btn-warning">Search</a></li> &nbsp;&nbsp;					
+						<li class="nav-item"><a  href="SearchByPlatform.jsp" class="btn btn-warning">SearchByPlatform</a></li> &nbsp;&nbsp;					
 						
 					</ul>
 				</div>
 			</div>
 		</nav>
 
+  <h1> Welcome to OTT Platform</h1>
 </body>
 </html>
